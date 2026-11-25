@@ -27,3 +27,7 @@ Run a level's skill once to be guided, and again when you are done to be checked
 Load the plugin: `/plugin marketplace add guriandoro/cordada` then `/plugin install cordada@cordada`, or from a clone `claude --plugin-dir cordada/plugins/cordada`.
 
 Commit after each level and `/clear` before the next. Behind on the sample? `cordada/sample/create.sh vaquita-3 --level 3` (2 to 5). Repo: `https://github.com/guriandoro/cordada`
+
+![QR code to github.com/guriandoro/cordada](qr-cordada.png)
+
+Scan for the repo: the plugin, the sample, and this card.

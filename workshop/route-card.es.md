@@ -27,3 +27,7 @@ Corré el skill de un nivel una vez para que te guíe, y otra vez cuando termina
 Cargá el plugin: `/plugin marketplace add guriandoro/cordada` y después `/plugin install cordada@cordada`, o desde un clon `claude --plugin-dir cordada/plugins/cordada`.
 
 Commit después de cada nivel y `/clear` antes del siguiente. ¿Atrasado en el ejemplo? `cordada/sample/create.sh vaquita-3 --level 3` (de 2 a 5). Repo: `https://github.com/guriandoro/cordada`
+
+![Código QR a github.com/guriandoro/cordada](qr-cordada.png)
+
+Escaneá para ir al repo: el plugin, el ejemplo y esta tarjeta.
