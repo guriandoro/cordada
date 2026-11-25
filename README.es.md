@@ -2,7 +2,7 @@ English: [README.md](README.md)
 
 # Cordada
 
-![Cordada: cinco escaladores atados a la misma cuerda subiendo una montaña. Nivel 1 Brief, definir el objetivo. Nivel 2 Mapa, entender el repo. Nivel 3 Equipo, sumar herramientas. Nivel 4 Checks, verificar el resultado. Nivel 5 Cuerda, coordinar un equipo.](docs/cordada.jpg)
+![Cordada: cuatro escaladores atados a la misma cuerda subiendo una montaña. Nivel 1 Brief, definir el objetivo. Nivel 2 Mapa, entender el repo. Nivel 3 Equipo, sumar herramientas. Nivel 4 Checks, verificar el resultado. Nivel 5 Cuerda, coordinar un equipo.](docs/cordada.jpg)
 
 Una capa de trabajo para ingenieros que usan Claude Code, construida de a un nivel.
 

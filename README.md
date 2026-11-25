@@ -1,6 +1,6 @@
 # Cordada
 
-![Cordada: five climbers on one rope going up a mountain. Level 1 Brief, define the goal. Level 2 Map, understand the repo. Level 3 Gear, add the tools. Level 4 Checks, verify the result. Level 5 Rope, run a team.](docs/cordada.jpg)
+![Cordada: four climbers on one rope going up a mountain. Level 1 Brief, define the goal. Level 2 Map, understand the repo. Level 3 Gear, add the tools. Level 4 Checks, verify the result. Level 5 Rope, run a team.](docs/cordada.jpg)
 
 An engineer's operating layer for Claude Code, built one level at a time.
 
