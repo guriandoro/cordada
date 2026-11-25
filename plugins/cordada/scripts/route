@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# cordada route: which levels does this repo have, and what is the next one?
+# Read-only. Usage: route [--level]     (--level prints only the highest level reached, 1-5)
+set -u
+
+root="$(git rev-parse --show-toplevel 2>/dev/null)" || { echo "Not inside a git repository. Cordada works per repo: run 'git init' first." >&2; exit 2; }
+cd "$root" || exit 2
+
+has_map=no; has_gear=no; has_checks=no; has_rope=no
+map_note="no CLAUDE.md"; gear_note="no project skill"; checks_note="no ./check"; rope_note="no task database"
+
+map=""
+if [ -f CLAUDE.md ]; then map=CLAUDE.md; elif [ -f .claude/CLAUDE.md ]; then map=.claude/CLAUDE.md; fi
+if [ -n "$map" ]; then
+  filled=$(grep -c '[^[:space:]]' "$map")
+  total=$(wc -l < "$map" | tr -d ' ')
+  if [ "$filled" -ge 8 ]; then has_map=yes; map_note="$map, $total lines"; else map_note="$map is nearly empty ($total lines)"; fi
+elif [ -f AGENTS.md ]; then map_note="no CLAUDE.md (AGENTS.md exists: /cordada:map can start from it)"
+fi
+
+skills=$(find .claude/skills -name SKILL.md 2>/dev/null | wc -l | tr -d ' ')
+hook=no; [ -f .claude/settings.json ] && grep -q '"hooks"' .claude/settings.json && hook=yes
+if [ "$skills" -ge 1 ]; then has_gear=yes; gear_note="$skills project skill(s), hook: $hook"; fi
+
+if [ -f check ] && [ -x check ]; then
+  if [ -n "$map" ] && grep -q '\./check' "$map"; then has_checks=yes; checks_note="./check, named in CLAUDE.md"; else checks_note="./check exists but CLAUDE.md does not name it"; fi
+fi
+
+if [ -d .beads ]; then
+  if command -v bd >/dev/null 2>&1; then
+    if [ -n "$map" ] && grep -qi 'bd ready' "$map"; then has_rope=yes; rope_note="beads, named in CLAUDE.md"; else rope_note=".beads exists but CLAUDE.md does not say how to use it"; fi
+  else rope_note=".beads exists but bd is not installed"; fi
+fi
+
+# A level counts only if every level below it is in place.
+level=1; next="map"
+if [ $has_map = yes ]; then level=2; next="gear"
+  if [ $has_gear = yes ]; then level=3; next="checks"
+    if [ $has_checks = yes ]; then level=4; next="rope"
+      if [ $has_rope = yes ]; then level=5; next="climb"; fi
+    fi
+  fi
+fi
+
+if [ "${1:-}" = "--level" ]; then echo "$level"; exit 0; fi
+
+mark() { if [ "$1" = yes ]; then printf 'yes'; else printf ' - '; fi; }
+echo "Cordada route for $(basename "$root")"
+echo
+printf '  %-10s %-8s %-4s %s\n' Level Artifact Have Detail
+printf '  %-10s %-8s %-4s %s\n' "1 Prompt"  Brief  "n/a" "a habit, not a file: /cordada:brief"
+printf '  %-10s %-8s %-4s %s\n' "2 Context" Map    "$(mark $has_map)"    "$map_note"
+printf '  %-10s %-8s %-4s %s\n' "3 Harness" Gear   "$(mark $has_gear)"   "$gear_note"
+printf '  %-10s %-8s %-4s %s\n' "4 Loop"    Checks "$(mark $has_checks)" "$checks_note"
+printf '  %-10s %-8s %-4s %s\n' "5 Graph"   Rope   "$(mark $has_rope)"   "$rope_note"
+echo
+echo "You are at level $level. Next: /cordada:$next"
+skipped=""
+[ $has_map = no ] && { [ $has_gear = yes ] || [ $has_checks = yes ] || [ $has_rope = yes ]; } && skipped="Map"
+[ $has_map = yes ] && [ $has_gear = no ] && { [ $has_checks = yes ] || [ $has_rope = yes ]; } && skipped="Gear"
+[ $has_map = yes ] && [ $has_gear = yes ] && [ $has_checks = no ] && [ $has_rope = yes ] && skipped="Checks"
+[ -n "$skipped" ] && echo "Note: a higher level is present but $skipped is missing. Levels above a gap don't count yet."
+exit 0

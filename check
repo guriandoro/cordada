@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# The definition of done for this repo. Exit 0 = good.
+set -u
+cd "$(dirname "$0")"
+fail=0
+step() { printf '== %s\n' "$1"; shift; "$@" || { echo "FAILED: $*"; fail=1; }; }
+
+step "plugin manifest" claude plugin validate plugins/cordada
+step "marketplace manifest" claude plugin validate .
+step "shell syntax" bash -n preflight.sh sample/create.sh sample/catchup/tasks.sh plugins/cordada/scripts/route plugins/cordada/skills/checks/assets/done-gate.sh
+step "python syntax" python3 -c 'import ast,sys; [ast.parse(open(f).read(), f) for f in sys.argv[1:]]' plugins/cordada/skills/gear/assets/protect.py
+step "route levels" bash tests/route.sh
+step "hooks" bash tests/hooks.sh
+step "sample and catch-up levels" bash tests/sample.sh
+step "no em dashes in docs" sh -c '! grep -rln "—" --include="*.md" --exclude="CLAUDE.local.md" . | grep -v "^./.beads/"'
+
+[ $fail -eq 0 ] && echo "CHECK PASSED" || echo "CHECK FAILED"
+exit $fail

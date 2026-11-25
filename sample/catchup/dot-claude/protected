@@ -1,0 +1,1 @@
+vaquita/__init__.py  # the release script reads __version__ from it

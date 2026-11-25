@@ -1,0 +1,19 @@
+{
+  "name": "cordada",
+  "version": "0.1.0",
+  "description": "Climb the levels of AI engineering in your own repo. Each skill adds the one artifact the next level needs: Brief, Map, Gear, Checks, Rope.",
+  "author": {
+    "name": "Agustín Gallego"
+  },
+  "keywords": [
+    "workflow",
+    "context",
+    "skills",
+    "hooks",
+    "loops",
+    "multi-agent",
+    "beads",
+    "worktrees"
+  ],
+  "license": "MIT"
+}

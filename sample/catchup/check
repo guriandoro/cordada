@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# The definition of done for this repo. Exit 0 = good.
+set -u
+cd "$(dirname "$0")"
+fail=0
+step() { printf '== %s\n' "$1"; shift; "$@" || { echo "FAILED: $*"; fail=1; }; }
+
+step "tests" python3 -m unittest discover -s tests
+
+[ $fail -eq 0 ] && echo "CHECK PASSED" || echo "CHECK FAILED"
+exit $fail
