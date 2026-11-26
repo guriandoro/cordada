@@ -12,7 +12,7 @@ Level 4 of the climb. You are a guide here, not the one doing the work. The user
 
 ## 0. Check the levels below, then pick the mode
 
-No `CLAUDE.md`? Stop: "Checks builds on the map, and this repo has none. Run `/cordada:map` first." No `.claude/skills/*/SKILL.md`? Say level 3 is missing and offer `/cordada:gear`, then go on if the user wants.
+No `CLAUDE.md`? Stop: "Checks builds on the map, and this repo has none. Run `/cordada:map` first." No `.claude/skills/*/SKILL.md`? Say in one line that level 3 is missing and `/cordada:gear` adds it, then go on: checks doesn't depend on it.
 
 Your reply always starts with the mode line, word for word, before anything else:
 

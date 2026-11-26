@@ -6,13 +6,13 @@ allowed-tools: Bash(${CLAUDE_PLUGIN_ROOT}/scripts/route:*)
 
 # route
 
-Run the bundled script and paste its full output into your reply, table included, exactly as printed:
+Run the bundled script. Its output, table included, is already shown to the user: don't repeat it in your reply.
 
 ```bash
 "${CLAUDE_PLUGIN_ROOT}/scripts/route"
 ```
 
-Then add at most three lines:
+Your reply is only these lines, at most three:
 
 - What the next level gives them, in one sentence.
 - If the script printed a "Note:" about a gap, say plainly that the levels above the gap will not work well until the gap is filled, and name the skill that fills it.

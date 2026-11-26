@@ -58,7 +58,7 @@ the hook command.
 
 Then close with these bullets as written, with no lead-in line and nothing added:
 - Read each file before accepting it. The description decides whether the skill ever loads, so check it uses your words.
-- The tool's proof run creates a real module. Use one you need next (from your task list), or delete the files after.
+- If the tool's proof run creates or changes real files, use something you need next, or undo it after.
 - When all three are done, run `/cordada:gear` again to check them.
 
 Stop there.
