@@ -57,7 +57,11 @@ Stop there.
 
 First line of the reply, as is: "Found ./check, so I'm checking it. For the guide instead: `/cordada:checks guide`."
 
-Read `./check`, `CLAUDE.md` and the project skill. Run `./check` once and time it. Look at what changed in the tests since level 3: `git log --oneline -- tests/` and `git diff <first commit that has ./check>~1 -- tests/` (or the working tree if nothing is committed). Show this table, one row per criterion: ✅, ❌ or ⚠️ (unsure), with the evidence.
+Read `./check`, `CLAUDE.md` and the project skill. Run `./check` once and time it.
+
+For row 7, first find where this repo's tests live: a folder (`tests/`, `test/`, `spec/`) or files next to the code (`*_test.go`, `test_*.py`, `*_test.py`, `*.test.ts`, `*.spec.js`, ...). Build the list of paths with `git ls-files`, and say which pattern you used. Then look at what changed in those paths since just before `./check` was added: `git log --oneline -- <paths>` and `git diff <first commit that has ./check>~1 -- <paths>` (or against the working tree if nothing is committed). Look for deleted tests, skips added (`t.Skip`, `@skip`, `.skip(`, `xit(`, ...) and changed expected values. If you can't tell where the tests are, row 7 is ⚠️, not ✅.
+
+Show this table, one row per criterion: ✅, ❌ or ⚠️ (unsure), with the evidence.
 
 | # | Criterion | How to check |
 |---|---|---|
